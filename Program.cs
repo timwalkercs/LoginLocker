@@ -1,8 +1,21 @@
+using LoginLocker.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using MySql.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
+
+
+//WORKING THIS OUT RN......
+// Configure the DbContext
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+    options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 
 var app = builder.Build();
 
