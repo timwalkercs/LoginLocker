@@ -14,7 +14,7 @@ function Home() {
 
     return (
         <div>
-            <h1>Project In Development!</h1>
+            <h1>Project In Development!!!</h1>
             <p>Things to do:</p>
             <ul>
                 <li>Convert template-generated class components to functional (Home, NavMenu, etc.)</li>
