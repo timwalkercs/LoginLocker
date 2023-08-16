@@ -1,4 +1,7 @@
-﻿namespace LoginLocker.Data.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
+namespace LoginLocker.Data.Models
 {
     public class User
     {

@@ -1,43 +1,66 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 
 function SignUp() {
+    const [username, setUsername] = useState('');
+    const [masterpass, setMasterpass] = useState('');
+    const [message, setMessage] = useState('');
 
-    //useEffect code block added by ChatGPT when asked to convert original class component to functional
-    useEffect(() => {
-        // Code here will be equivalent to componentDidMount
-        // You can perform any necessary setup or fetch data
-        // and clean up in the returned function for componentWillUnmount
-        return () => {
-            // Clean up code here will be equivalent to componentWillUnmount
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const newUser = {
+            username: username,
+            masterpass: masterpass,
         };
-    }, []);
+
+        try {
+            const response = await fetch('/api/User/RegisterUser', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newUser),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                setMessage(data.message);
+            } else {
+                setMessage('Failed to register user.');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            setMessage('An error occurred.');
+        }
+    };
 
     return (
         <div>
-            <h1>Sign Up Page</h1>
-            <div>
-                <form method="post" >
-                    <fieldset>
-                        <legend>Please enter your account information.</legend>
-                        <div>
-                            <label for="Username">Username:</label>
-                            <input type="text" name="CompanyName" value="" />
-                        </div>
-                        <div>
-                            <label for="Masterpass">Password:</label>
-                            <input type="text" name="ContactName" value="" />
-                        </div>
-                        <div>
-                            <label>&nbsp;</label>
-                            <input type="submit" value="Sign Up" class="submit" />
-                        </div>
-                    </fieldset>
-                </form>
-                <p>Already have an account? <a href="/sign-in">Sign In!</a></p>
-                
-            </div>
+            <h2>User Registration</h2>
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label>Username:</label>
+                    <input
+                        type="text"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        required
+                    />
+                </div>
+                <div>
+                    <label>Masterpass:</label>
+                    <input
+                        type="password"
+                        value={masterpass}
+                        onChange={(e) => setMasterpass(e.target.value)}
+                        required
+                    />
+                </div>
+                <button type="submit">Register</button>
+            </form>
+            <p>{message}</p>
         </div>
     );
-};
+}
 
 export default SignUp;

@@ -1,5 +1,7 @@
 ﻿using LoginLocker.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using LoginLocker.Controllers;
+
 
 namespace LoginLocker.Data
 {
@@ -19,8 +21,13 @@ namespace LoginLocker.Data
         {
             // Configure your entity mappings and other configurations
             // For example:
+
+            modelBuilder.Entity<User>().Property(u => u.UserID).ValueGeneratedOnAdd();
             modelBuilder.Entity<User>().HasKey(u => u.UserID);
+            
+
             modelBuilder.Entity<Login>().HasKey(l => l.LoginID);
+            modelBuilder.Entity<Login>().Property(l => l.LoginID).ValueGeneratedOnAdd();
         }
     }
 }

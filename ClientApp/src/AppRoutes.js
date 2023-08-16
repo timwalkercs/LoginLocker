@@ -8,10 +8,6 @@ const AppRoutes = [
     element: <Home />
   },
   {
-    path: '/fetch-data',
-    element: <FetchData />
-    },
-  {
     path: '/sign-in',
     element: <SignIn />
     },
