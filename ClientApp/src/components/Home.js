@@ -15,14 +15,12 @@ function Home() {
     return (
         <div>
             <h1>Project In Development!!!</h1>
-            <p>Things to do:</p>
+            <p>Current State:</p>
             <ul>
-                <li>Convert template-generated class components to functional (Home, NavMenu, etc.)</li>
-                <li>Test DB to see in it works</li>
-                <li>Create a Login page</li>
+                <li>Rough Sign Up page has been made but encountering some errors....</li>
+                <li>Submitting the form is yielding a 404 error claiming the route to the UserController/Register method cannot be found.</li>
+                <li>ChatGPT servers are burining down from my begging for help.</li>
             </ul>
-
-            <p>The <code>ClientApp</code> subdirectory is a standard React application based on the <code>create-react-app</code> template. If you open a command prompt in that directory, you can run <code>npm</code> commands such as <code>npm test</code> or <code>npm install</code>.</p>
         </div>
     );
 };

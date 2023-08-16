@@ -29,5 +29,6 @@ namespace LoginLocker.Data
             modelBuilder.Entity<Login>().HasKey(l => l.LoginID);
             modelBuilder.Entity<Login>().Property(l => l.LoginID).ValueGeneratedOnAdd();
         }
+
     }
 }

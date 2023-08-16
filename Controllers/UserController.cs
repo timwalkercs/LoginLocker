@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace LoginLocker.Controllers
 {
-    [Route("api/[controller]")]
+
     [ApiController]
+    [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -16,7 +17,7 @@ namespace LoginLocker.Controllers
             _context = context;
         }
 
-        //[HttpPost("RegisterUser")]
+        
         [HttpPost]
         public async Task<IActionResult> RegisterUser([FromBody] User user)
         {

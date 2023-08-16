@@ -14,7 +14,7 @@ function SignUp() {
         };
 
         try {
-            const response = await fetch('/api/User/RegisterUser', {
+            const response = await fetch('api/User/RegisterUser', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
