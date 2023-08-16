@@ -1,4 +1,3 @@
-import { FetchData } from "./components/FetchData";
 import Home from "./components/Home";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";

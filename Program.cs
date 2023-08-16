@@ -1,5 +1,6 @@
 using LoginLocker.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.DependencyInjection;
 using MySql.EntityFrameworkCore;
 
