@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-function SignIn() {
+function SignUp() {
 
     //useEffect code block added by ChatGPT when asked to convert original class component to functional
     useEffect(() => {
@@ -14,7 +14,7 @@ function SignIn() {
 
     return (
         <div>
-            <h1>Sign In Page</h1>
+            <h1>Sign Up Page</h1>
             <div>
                 <form method="post" >
                     <fieldset>
@@ -29,15 +29,15 @@ function SignIn() {
                         </div>
                         <div>
                             <label>&nbsp;</label>
-                            <input type="submit" value="Sign In" class="submit" />
+                            <input type="submit" value="Sign Up" class="submit" />
                         </div>
                     </fieldset>
                 </form>
-                <p>Dont have an account? <a href="/sign-up">Sign Up!</a></p>
+                <p>Already have an account? <a href="/sign-in">Sign In!</a></p>
                 
             </div>
         </div>
     );
 };
 
-export default SignIn;
+export default SignUp;

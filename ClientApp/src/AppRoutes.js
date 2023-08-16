@@ -1,6 +1,7 @@
 import { FetchData } from "./components/FetchData";
 import Home from "./components/Home";
 import SignIn from "./components/SignIn";
+import SignUp from "./components/SignUp";
 
 const AppRoutes = [
   {
@@ -14,6 +15,10 @@ const AppRoutes = [
   {
     path: '/sign-in',
     element: <SignIn />
+    },
+  {
+    path: '/sign-up',
+    element: <SignUp />
   }
 ];
 
