@@ -7,7 +7,7 @@ namespace LoginLocker.Controllers
 {
 
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
         private readonly ApplicationDbContext _context;

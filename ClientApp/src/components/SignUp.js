@@ -15,7 +15,7 @@ function SignUp() {
 
         try {
             console.log(JSON.stringify(newUser)); //print the JSON string 
-            const response = await fetch('User/Register', {
+            const response = await fetch('api/User/Register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
