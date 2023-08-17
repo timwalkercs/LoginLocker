@@ -17,8 +17,8 @@ namespace LoginLocker.Controllers
             _context = context;
         }
 
-        [Route("/Register")]
-        [HttpPost]
+        
+        [HttpPost("Register")]
         public async Task<IActionResult> Register([FromBody] User user)
         {
             if (user == null)
