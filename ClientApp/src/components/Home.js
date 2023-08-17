@@ -18,8 +18,9 @@ function Home() {
             <p>Current State:</p>
             <ul>
                 <li>Rough Sign Up page has been made but encountering some errors....</li>
-                <li>Submitting the form is yielding a 404 error claiming the route to the UserController/Register method cannot be found.</li>
-                <li>ChatGPT servers are burining down from my begging for help.</li>
+                <li>Submitting the form is now yielding a 400 error (Bad POST Request)</li>
+                <li>Test method added to UserController which shows the fron and back ends do in fact reach each other. (see button in sign-up page)</li>
+                <li>I am single-handedly burning the GPT servers to the ground</li>
             </ul>
         </div>
     );
