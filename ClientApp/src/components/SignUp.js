@@ -14,7 +14,8 @@ function SignUp() {
         };
 
         try {
-            const response = await fetch('api/User/RegisterUser', {
+            console.log(JSON.stringify(newUser)); //print the JSON string 
+            const response = await fetch('User/Register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -23,9 +24,11 @@ function SignUp() {
             });
 
             if (response.ok) {
+                console.log("OK"); //response was good
                 const data = await response.json();
                 setMessage(data.message);
             } else {
+                console.log("NOT OK"); //response was bad
                 setMessage('Failed to register user.');
             }
         } catch (error) {
@@ -33,6 +36,7 @@ function SignUp() {
             setMessage('An error occurred.');
         }
     };
+
 
     return (
         <div>

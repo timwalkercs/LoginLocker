@@ -7,7 +7,7 @@ namespace LoginLocker.Controllers
 {
 
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class UserController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -17,9 +17,9 @@ namespace LoginLocker.Controllers
             _context = context;
         }
 
-        
+        [Route("/Register")]
         [HttpPost]
-        public async Task<IActionResult> RegisterUser([FromBody] User user)
+        public async Task<IActionResult> Register([FromBody] User user)
         {
             if (user == null)
             {
