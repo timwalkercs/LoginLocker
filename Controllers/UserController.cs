@@ -48,5 +48,14 @@ namespace LoginLocker.Controllers
                 return BadRequest(ModelState);
             }
         }
+
+        //TEST CONRTOLLER METHOD TO GAUGE COMMUNICATION WITH FRONT-END
+        [HttpGet("Test")]
+        public IActionResult Test()
+        {
+            return Ok("GET request test successful.");
+        }
+
+
     }
 }

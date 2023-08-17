@@ -37,6 +37,22 @@ function SignUp() {
         }
     };
 
+    //TEST METHOD TO ATTEMPT TO REACH API
+    const handleTestButtonClick = async () => {
+        try {
+            const response = await fetch('api/user/Test');
+            if (response.ok) {
+                const data = await response.text();
+                setMessage(data);
+            } else {
+                setMessage('Test request failed.');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            setMessage('An error occurred.');
+        }
+    };
+
 
     return (
         <div>
@@ -62,6 +78,7 @@ function SignUp() {
                 </div>
                 <button type="submit">Register</button>
             </form>
+            <button onClick={handleTestButtonClick}>Test GET Request</button>
             <p>{message}</p>
         </div>
     );
