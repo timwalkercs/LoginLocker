@@ -26,28 +26,11 @@ function SignUp() {
             });
 
             if (response.ok) {
-                console.log("OK"); //response was good
                 const data = await response.json();
                 setMessage(data.message);
             } else {
-                console.log("NOT OK"); //response was bad
-                setMessage('Failed to register user.');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            setMessage('An error occurred.');
-        }
-    };
-
-    //TEST METHOD TO ATTEMPT TO REACH API
-    const handleTestButtonClick = async () => {
-        try {
-            const response = await fetch('api/user/Test');
-            if (response.ok) {
-                const data = await response.text();
-                setMessage(data);
-            } else {
-                setMessage('Test request failed.');
+                const data = await response.json();
+                setMessage('Failed to register user. ' + data.message);
             }
         } catch (error) {
             console.error('Error:', error);
@@ -58,11 +41,12 @@ function SignUp() {
 
     return (
         <div className="outerDiv">
-            <h2>User Registration</h2>
+            <h2 id="header">User Registration</h2>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label>Username:</label>
                     <input
+                        id="userinput"
+                        placeholder="Username"
                         type="text"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
@@ -70,8 +54,9 @@ function SignUp() {
                     />
                 </div>
                 <div>
-                    <label>Masterpass:</label>
                     <input
+                        id="passinput"
+                        placeholder="Master Password"
                         type="password"
                         value={masterpass}
                         onChange={(e) => setMasterpass(e.target.value)}
@@ -80,7 +65,6 @@ function SignUp() {
                 </div>
                 <button type="submit">Register</button>
                 </form>
-            <button onClick={handleTestButtonClick}>Test GET Request</button>
             <p>{message}</p>
         </div>
     );

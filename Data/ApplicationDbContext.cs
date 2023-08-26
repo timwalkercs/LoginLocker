@@ -10,7 +10,7 @@ namespace LoginLocker.Data
         //User Table
         public DbSet<User> Users { get; set; }
 
-        //AccountData Table
+        //User's Logins Table
         public DbSet<Login> Logins { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
@@ -22,12 +22,14 @@ namespace LoginLocker.Data
             // Configure your entity mappings and other configurations
             // For example:
 
+            //Users
             modelBuilder.Entity<User>().Property(u => u.UserID).ValueGeneratedOnAdd();
             modelBuilder.Entity<User>().HasKey(u => u.UserID);
-            
 
-            modelBuilder.Entity<Login>().HasKey(l => l.LoginID);
+            //Logins
             modelBuilder.Entity<Login>().Property(l => l.LoginID).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Login>().HasKey(l => l.LoginID);
+            
         }
 
     }

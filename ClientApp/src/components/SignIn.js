@@ -1,40 +1,72 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
+import './SignUp.css';
 
 function SignIn() {
 
-    //useEffect code block added by ChatGPT when asked to convert original class component to functional
-    useEffect(() => {
-        // Code here will be equivalent to componentDidMount
-        // You can perform any necessary setup or fetch data
-        // and clean up in the returned function for componentWillUnmount
-        return () => {
-            // Clean up code here will be equivalent to componentWillUnmount
+    const [username, setUsername] = useState('');
+    const [masterpass, setMasterpass] = useState('');
+    const [message, setMessage] = useState('');
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const attemptedUser = {
+            username: username,
+            masterpass: masterpass,
         };
-    }, []);
+
+        try {
+            console.log(JSON.stringify(attemptedUser)); //print the JSON string 
+            const response = await fetch('api/user/SignIn', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(attemptedUser),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                setMessage(data.message);
+            } else {
+                setMessage('Failed to register user.');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            setMessage('An error occurred.');
+        }
+    };
 
     return (
-        <div>
-            <h1>Sign In Page</h1>
+        <div className="outerDiv">
+            <h1 id="header">Sign In</h1>
             <div>
-                <form method="post" >
-                    <fieldset>
-                        <legend>Please enter your account information.</legend>
-                        <div>
-                            <label for="Username">Username:</label>
-                            <input type="text" name="CompanyName" value="" />
-                        </div>
-                        <div>
-                            <label for="Masterpass">Password:</label>
-                            <input type="text" name="ContactName" value="" />
-                        </div>
-                        <div>
-                            <label>&nbsp;</label>
-                            <input type="submit" value="Sign In" class="submit" />
-                        </div>
-                    </fieldset>
+                <form onSubmit={handleSubmit}>
+                    <legend>Please enter your account information.</legend>
+                    <div>
+                        <input
+                            id="userinput"
+                            placeholder="Username"
+                            type="text"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <input
+                            id="passinput"
+                            placeholder="Master Password"
+                            type="text"
+                            value={masterpass}
+                            onChange={(e) => setMasterpass(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <input type="submit" value="Sign In"/>
                 </form>
                 <p>Dont have an account? <a href="/sign-up">Sign Up!</a></p>
-                
+                <p>{message}</p>
             </div>
         </div>
     );
