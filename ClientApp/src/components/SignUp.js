@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Container } from 'reactstrap';
+import './SignUp.css';
 
 function SignUp() {
     const [username, setUsername] = useState('');
@@ -55,7 +57,7 @@ function SignUp() {
 
 
     return (
-        <div>
+        <div className="outerDiv">
             <h2>User Registration</h2>
             <form onSubmit={handleSubmit}>
                 <div>
@@ -77,7 +79,7 @@ function SignUp() {
                     />
                 </div>
                 <button type="submit">Register</button>
-            </form>
+                </form>
             <button onClick={handleTestButtonClick}>Test GET Request</button>
             <p>{message}</p>
         </div>
