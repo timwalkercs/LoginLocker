@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import axios from 'axios'; // Import Axios
 import './SignUp.css';
 
 function SignIn() {
-
     const [username, setUsername] = useState('');
     const [masterpass, setMasterpass] = useState('');
     const [message, setMessage] = useState('');
@@ -16,17 +16,15 @@ function SignIn() {
         };
 
         try {
-            console.log(JSON.stringify(attemptedUser)); //print the JSON string 
-            const response = await fetch('api/user/SignIn', {
-                method: 'POST',
+            console.log(JSON.stringify(attemptedUser)); // Print the JSON string
+            const response = await axios.post('/api/user/SignIn', attemptedUser, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(attemptedUser),
             });
 
-            if (response.ok) {
-                const data = await response.json();
+            if (response.status === 200) {
+                const data = response.data;
                 setMessage(data.message);
             } else {
                 setMessage('Failed to sign in.');
@@ -57,19 +55,19 @@ function SignIn() {
                         <input
                             id="passinput"
                             placeholder="Master Password"
-                            type="text"
+                            type="password" // Change this to 'password' to hide the password
                             value={masterpass}
                             onChange={(e) => setMasterpass(e.target.value)}
                             required
                         />
                     </div>
-                    <input type="submit" value="Sign In"/>
+                    <input type="submit" value="Sign In" />
                 </form>
-                <p>Dont have an account? <a href="/sign-up">Sign Up!</a></p>
+                <p>Don't have an account? <a href="/sign-up">Sign Up!</a></p>
                 <p>{message}</p>
             </div>
         </div>
     );
-};
+}
 
 export default SignIn;

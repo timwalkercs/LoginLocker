@@ -30,7 +30,7 @@ namespace LoginLocker.Controllers
             var userExists = _context.Users.Any(u => u.Username == user.Username);
             if (userExists)
             {
-                return BadRequest(new { message = "This username already exists..." });
+                return Ok(new { message = "This username already exists..." });
             }
 
             if (ModelState.IsValid)
@@ -70,7 +70,7 @@ namespace LoginLocker.Controllers
                     //Check if Username Password combo is valid
                     if (VerifyLogin(user.Username, user.Masterpass))
                     {
-                        return Ok(new { message = "This user does exist!" });
+                        return Ok(new { message = "This username password combo does exist!" });
                     }
                     else 
                     {

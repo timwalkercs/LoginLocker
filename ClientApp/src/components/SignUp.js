@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container } from 'reactstrap';
+import axios from 'axios'; // Import Axios
 import './SignUp.css';
 
 function SignUp() {
@@ -16,20 +16,18 @@ function SignUp() {
         };
 
         try {
-            console.log(JSON.stringify(newUser)); //print the JSON string 
-            const response = await fetch('api/user/Register', {
-                method: 'POST',
+            console.log(JSON.stringify(newUser)); // Print the JSON string
+            const response = await axios.post('/api/user/Register', newUser, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(newUser),
             });
 
-            if (response.ok) {
-                const data = await response.json();
+            if (response.status === 200) {
+                const data = response.data;
                 setMessage(data.message);
             } else {
-                const data = await response.json();
+                const data = response.data;
                 setMessage('Failed to register user. ' + data.message);
             }
         } catch (error) {
@@ -37,7 +35,6 @@ function SignUp() {
             setMessage('An error occurred.');
         }
     };
-
 
     return (
         <div className="outerDiv">
@@ -64,7 +61,7 @@ function SignUp() {
                     />
                 </div>
                 <button type="submit">Register</button>
-                </form>
+            </form>
             <p>{message}</p>
         </div>
     );
