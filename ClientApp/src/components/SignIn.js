@@ -29,7 +29,7 @@ function SignIn() {
                 const data = await response.json();
                 setMessage(data.message);
             } else {
-                setMessage('Failed to register user.');
+                setMessage('Failed to sign in.');
             }
         } catch (error) {
             console.error('Error:', error);

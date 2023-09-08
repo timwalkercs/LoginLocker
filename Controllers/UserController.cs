@@ -39,7 +39,7 @@ namespace LoginLocker.Controllers
                 {
                     _context.Users.Add(user);
                     await _context.SaveChangesAsync();
-                    return Ok(new { message = "User registered successfully!" });
+                    return Ok(new { message = "User registered successfully! Sign in." });
                 }
                 catch (Exception ex)
                 {
@@ -62,20 +62,21 @@ namespace LoginLocker.Controllers
                 return BadRequest("User data is missing.");
             }
 
-            var userExists = _context.Users.Any(u => u.Username == user.Username);
-            if (!userExists)
-            {
-                return Ok(new { message = "This username does not exist..." });
-            }
-
+            //if ModelState is valid
             if (ModelState.IsValid)
             {
                 try
                 {
-                    //Check if User exists in table
+                    //Check if Username Password combo is valid
+                    if (VerifyLogin(user.Username, user.Masterpass))
+                    {
+                        return Ok(new { message = "This user does exist!" });
+                    }
+                    else 
+                    {
+                        return Ok(new { message = "This username password combination does not exist, try again." });
+                    }
 
-                    await _context.SaveChangesAsync();
-                    return Ok(new { message = "User authenticated!" });
                 }
                 catch (Exception ex)
                 {
@@ -87,6 +88,11 @@ namespace LoginLocker.Controllers
                 // Return validation errors
                 return BadRequest(ModelState);
             }         
+        }
+
+        private bool VerifyLogin(string enteredUser, string enteredPass) {
+            var loginExists = _context.Users.Any(u => u.Username == enteredUser && u.Masterpass == enteredPass);
+            if (loginExists) return true; else return false;
         }
 
     }
