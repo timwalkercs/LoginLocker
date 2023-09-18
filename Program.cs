@@ -1,8 +1,11 @@
 using LoginLocker.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using MySql.EntityFrameworkCore;
+using System.Text;
 
 namespace LoginLocker
 {
@@ -22,6 +25,22 @@ namespace LoginLocker
                 options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
 
+            // Add JWT Authentication
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.RequireHttpsMetadata = false; // For development purposes only
+                    options.SaveToken = true;
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("secret-key")),
+                        ValidateIssuer = false, // You can change this based on your requirements
+                        ValidateAudience = false, // You can change this based on your requirements
+                    };
+                });
+
+
             //Build
             var app = builder.Build();
 
@@ -34,6 +53,10 @@ namespace LoginLocker
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
+
+            // Use authentication and authorization
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",

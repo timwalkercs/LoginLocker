@@ -40,6 +40,7 @@ function SignUp() {
         <div className="outerDiv">
             <h2 id="header">User Registration</h2>
             <form onSubmit={handleSubmit}>
+                <legend>Create your username...</legend>
                 <div>
                     <input
                         id="userinput"
@@ -50,6 +51,7 @@ function SignUp() {
                         required
                     />
                 </div>
+                <legend>and a secure Master Password.</legend>
                 <div>
                     <input
                         id="passinput"
